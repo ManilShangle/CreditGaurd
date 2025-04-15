@@ -1,0 +1,30 @@
+.header {
+  background-color: #2f3640;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  align-items: center;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hamburger {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #00a8ff;
+}

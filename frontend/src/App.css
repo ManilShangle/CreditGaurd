@@ -1,0 +1,36 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+.main {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f5f6fa;
+  min-height: calc(100vh - 120px);
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 5px #8e44ad;
+  }
+  50% {
+    box-shadow: 0 0 20px #8e44ad, 0 0 30px #6c5ce7;
+  }
+  100% {
+    box-shadow: 0 0 5px #8e44ad;
+  }
+}

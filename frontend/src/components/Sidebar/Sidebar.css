@@ -1,0 +1,25 @@
+.sidebar {
+    width: 220px;
+    background-color: #1c1e4c;
+    color: white;
+    padding: 2rem 1rem;
+    height: 100%;
+    min-height: calc(100vh - 120px);
+  }
+  
+  .sidebar-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-item {
+    padding: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar-item:hover {
+    background-color: #40739e;
+    border-radius: 8px;
+  }
+  
