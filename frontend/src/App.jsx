@@ -6,6 +6,7 @@ import Main from './components/Main/Main.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import About from './pages/About/About.jsx';
 import Contact from './pages/Contact/Contact.jsx';
+import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import './App.css';
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
           </main>
         </div>

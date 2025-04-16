@@ -1,0 +1,8 @@
+Flask
+Flask-Login
+Flask-Bcrypt
+Flask-SQLAlchemy
+python-dotenv
+pandas
+scikit-learn
+flask-cors
