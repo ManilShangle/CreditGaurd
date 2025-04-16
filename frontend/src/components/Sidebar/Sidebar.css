@@ -23,4 +23,14 @@
     background-color: #40739e;
     border-radius: 8px;
   }
+
+  .sidebar-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .sidebar-link:hover {
+    text-decoration: underline;
+  }
+  
   
