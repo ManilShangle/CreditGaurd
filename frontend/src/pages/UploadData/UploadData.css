@@ -67,6 +67,12 @@
   display: none;
 }
 
+.selected-file {
+  color: #dcdde1;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+}
+
 .upload-button {
   background-color: #4e54c8;
   color: #fff;

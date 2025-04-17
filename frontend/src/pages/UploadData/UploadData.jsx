@@ -1,17 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './UploadData.css';
+import FlashMessage from '../../components/FlashMessage/FlashMessage.jsx';
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
+  const [flash, setFlash] = useState({ message: '', type: '' });
+
+  useEffect(() => {
+    const savedFileName = localStorage.getItem('uploadedFileName');
+    if (savedFileName) {
+      setFile({ name: savedFileName });
+    }
+  }, []);
+  
+  const showFlash = (message, type = 'success') => {
+    setFlash({ message, type });
+  };
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selected = e.target.files[0];
+    if (selected) {
+      setFile(selected);
+      localStorage.setItem('uploadedFileName', selected.name);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!file) {
-      alert("Please select a CSV file before submitting.");
+      showFlash('Please select a CSV file before submitting.', 'error');
       return;
     }
 
@@ -25,16 +42,23 @@ const UploadPage = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        alert("File uploaded successfully!");
+        showFlash('File uploaded successfully!', 'success');
       })
       .catch(err => {
         console.error(err);
-        alert("An error occurred while uploading the file.");
+        showFlash('An error occurred while uploading the file.', 'error');
       });
   };
 
   return (
     <div className="upload-page">
+      {flash.message && (
+        <FlashMessage
+          message={flash.message}
+          type={flash.type}
+          onClose={() => setFlash({ message: '', type: '' })}
+        />
+      )}
       <h2 className="upload-title">Upload Transaction CSV</h2>
       <p className="upload-instructions">
         Upload a CSV file containing transaction data for fraud analysis.
@@ -53,6 +77,13 @@ const UploadPage = () => {
           Choose CSV File
           <input type="file" accept=".csv" onChange={handleFileChange} />
         </label>
+
+        {file && (
+          <p className="selected-file">
+            Selected File: <code>{file.name}</code>
+          </p>
+        )}
+
         <button className="upload-button" type="submit">Upload</button>
       </form>
     </div>
