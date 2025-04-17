@@ -13,6 +13,11 @@
   gap: 1rem;
 }
 
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .hamburger {
   font-size: 1.5rem;
   cursor: pointer;

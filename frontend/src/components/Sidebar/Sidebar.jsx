@@ -12,7 +12,9 @@ const Sidebar = () => {
         <Link to="/upload" className="sidebar-link">
           <li className="sidebar-item">Upload CSV</li>
         </Link>
-        <li className="sidebar-item">Settings</li>
+        <Link to="/settings" className="sidebar-link">
+          <li className="sidebar-item">Settings</li>
+        </Link>
       </ul>
     </aside>
   );

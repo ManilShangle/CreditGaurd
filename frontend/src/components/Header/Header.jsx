@@ -1,18 +1,19 @@
 import React from 'react';
 import './Header.css';
 import { FaBars } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Header = ({ toggleSidebar }) => {
   return (
     <header className="header">
       <div className="left">
         <FaBars className="hamburger" onClick={toggleSidebar} />
-        <div className="logo">CreditGuard</div>
+        <div className="logo"><Link to="/">CreditGuard</Link></div>
       </div>
       <nav className="nav">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/contact">Contact</Link>
       </nav>
     </header>
   );

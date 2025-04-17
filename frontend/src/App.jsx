@@ -8,6 +8,7 @@ import Contact from './pages/Contact/Contact.jsx';
 import Main from './pages/Main/Main.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import UploadData from './pages/UploadData/UploadData.jsx';
+import Settings from './pages/Settings/Settings.jsx';
 import './App.css';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/upload" element={<UploadData />} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
           </main>
         </div>
