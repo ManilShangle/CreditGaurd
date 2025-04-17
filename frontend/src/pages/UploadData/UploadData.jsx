@@ -3,53 +3,58 @@ import './UploadData.css';
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
-  const [message, setMessage] = useState('');
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!file) {
-      setMessage('Please upload a file');
+      alert("Please select a CSV file before submitting.");
       return;
     }
 
     const formData = new FormData();
     formData.append('file', file);
 
-    try {
-      const response = await fetch('/api/predict/upload', {
-        method: 'POST',
-        body: formData,
+    fetch('http://localhost:5000/api/predict/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        alert("File uploaded successfully!");
+      })
+      .catch(err => {
+        console.error(err);
+        alert("An error occurred while uploading the file.");
       });
-
-      if (response.ok) {
-        setMessage('File uploaded successfully!');
-      } else {
-        setMessage('Error uploading file');
-      }
-    } catch (error) {
-      setMessage('Error uploading file');
-    }
   };
 
   return (
     <div className="upload-page">
-      <h2 className="upload-title">Upload CSV for Prediction</h2>
+      <h2 className="upload-title">Upload Transaction CSV</h2>
+      <p className="upload-instructions">
+        Upload a CSV file containing transaction data for fraud analysis.
+        <br /><br />
+        <strong>Required CSV Format:</strong>
+        <br />
+        Your file must include these columns in exactly this order:
+        <br />
+        <code>transaction_id, amount, time, location, device, is_fraud</code>
+        <br /><br />
+        Make sure the header row is present. The model will process each row and return a fraud prediction.
+      </p>
+
       <form className="upload-form" onSubmit={handleSubmit}>
-        <input
-          type="file"
-          accept=".csv"
-          onChange={handleFileChange}
-          className="file-input"
-        />
-        <button type="submit" className="upload-button">
-          Upload
-        </button>
+        <label className="upload-label">
+          Choose CSV File
+          <input type="file" accept=".csv" onChange={handleFileChange} />
+        </label>
+        <button className="upload-button" type="submit">Upload</button>
       </form>
-      {message && <p className="message">{message}</p>}
     </div>
   );
 };
