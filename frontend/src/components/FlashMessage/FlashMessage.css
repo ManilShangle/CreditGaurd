@@ -1,0 +1,45 @@
+.flash-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+  width: auto;
+  max-width: 80%;
+  font-weight: 600;
+  text-align: center;
+  overflow: hidden;
+}
+
+.flash-message.success {
+  border-left: 5px solid #2ecc71;
+}
+
+.flash-message.error {
+  border-left: 5px solid #e74c3c;
+}
+
+.timer-bar {
+  height: 4px;
+  background: white;
+  width: 0%;
+  animation: fillTimer 4s linear forwards;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+}
+
+@keyframes fillTimer {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
