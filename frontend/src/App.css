@@ -14,7 +14,7 @@
   flex: 1;
   padding: 2rem;
   background-color: #f5f6fa;
-  min-height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 .main-content {
