@@ -1,39 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import './UploadData.css';
-import FlashMessage from '../../components/FlashMessage/FlashMessage.jsx';
+import FlashMessage from '../../components/FlashMessage/FlashMessage';
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
-  const [flash, setFlash] = useState({ message: '', type: '' });
+  const [isLoading, setIsLoading] = useState(false);
+  const [flash, setFlash] = useState(null);
 
   useEffect(() => {
-    const savedFileName = localStorage.getItem('uploadedFileName');
+    const savedFileName = sessionStorage.getItem('uploadedFileName');
     if (savedFileName) {
       setFile({ name: savedFileName });
     }
   }, []);
-  
-  const showFlash = (message, type = 'success') => {
+
+  const showFlash = (message, type = 'info') => {
     setFlash({ message, type });
+    setTimeout(() => setFlash(null), 3000);
   };
 
   const handleFileChange = (e) => {
-    const selected = e.target.files[0];
-    if (selected) {
-      setFile(selected);
-      localStorage.setItem('uploadedFileName', selected.name);
-    }
+    setFile(e.target.files[0]);
+    sessionStorage.setItem('uploadedFileName', e.target.files[0].name);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!file) {
-      showFlash('Please select a CSV file before submitting.', 'error');
+      showFlash("Please select a CSV file before submitting.", "error");
       return;
     }
 
     const formData = new FormData();
     formData.append('file', file);
+    setIsLoading(true);
 
     fetch('http://localhost:5000/api/predict/upload', {
       method: 'POST',
@@ -42,34 +42,32 @@ const UploadPage = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        showFlash('File uploaded successfully!', 'success');
+        if (data.error) {
+          showFlash(data.error, "error");
+        } else {
+          showFlash("File uploaded successfully!", "success");
+        }
       })
+      
       .catch(err => {
         console.error(err);
-        showFlash('An error occurred while uploading the file.', 'error');
+        showFlash("An error occurred while uploading the file.", "error");
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   return (
     <div className="upload-page">
-      {flash.message && (
-        <FlashMessage
-          message={flash.message}
-          type={flash.type}
-          onClose={() => setFlash({ message: '', type: '' })}
-        />
-      )}
+      {flash && <FlashMessage message={flash.message} type={flash.type} />}
       <h2 className="upload-title">Upload Transaction CSV</h2>
       <p className="upload-instructions">
         Upload a CSV file containing transaction data for fraud analysis.
         <br /><br />
-        <strong>Required CSV Format:</strong>
-        <br />
-        Your file must include these columns in exactly this order:
-        <br />
-        <code>transaction_id, amount, time, location, device, is_fraud</code>
-        <br /><br />
-        Make sure the header row is present. The model will process each row and return a fraud prediction.
+        <strong>Required CSV Format:</strong><br />
+        <code>transaction_id, amount, time, location, device, is_fraud</code><br />
+        Ensure the header row is present. The model will process each row and return a fraud prediction.
       </p>
 
       <form className="upload-form" onSubmit={handleSubmit}>
@@ -78,13 +76,15 @@ const UploadPage = () => {
           <input type="file" accept=".csv" onChange={handleFileChange} />
         </label>
 
-        {file && (
-          <p className="selected-file">
-            Selected File: <code>{file.name}</code>
-          </p>
-        )}
+        {file && <div className="file-name">Selected: {file.name}</div>}
 
-        <button className="upload-button" type="submit">Upload</button>
+        <button className="upload-button" type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <div className="spinner"></div>
+          ) : (
+            "Upload"
+          )}
+        </button>
       </form>
     </div>
   );
