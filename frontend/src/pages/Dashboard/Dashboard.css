@@ -40,7 +40,15 @@
 }
 
 .main-card {
-  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .dashboard-grid {
@@ -49,16 +57,36 @@
   gap: 1.5rem;
 }
 
+.csv-preview-container {
+  padding: 1rem;
+}
+
+.csv-preview-wrapper {
+  overflow-x: hidden;
+  transition: all 0.3s ease-in-out;
+  max-height: 220px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.csv-preview-wrapper.expanded {
+  overflow-x: auto;
+  max-height: 400px;
+}
+
+.csv-table-container {
+  overflow-x: auto;
+}
+
 .csv-table {
-  width: 100%;
-  font-size: 0.85rem;
-  margin-top: 1rem;
+  width: max-content;
   border-collapse: collapse;
 }
 
-.csv-table th, .csv-table td {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 0.4rem;
+.csv-table th,
+.csv-table td {
+  padding: 8px 12px;
   text-align: left;
-  white-space: nowrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
 }
