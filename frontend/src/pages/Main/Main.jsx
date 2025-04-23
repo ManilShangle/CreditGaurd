@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Main.css';
 
 const Main = () => {
@@ -8,10 +9,12 @@ const Main = () => {
       <p className="main-subtitle">
         Your intelligent dashboard for monitoring credit card activity and preventing fraud.
       </p>
-      <div className="card">
-        <h2>Real-Time Transaction Feed</h2>
-        <p>Coming soon: View your latest transactions and get instant alerts for suspicious activity.</p>
-      </div>
+      <Link to='/dashboard'>
+        <div className="card">
+          <h2>Real-Time Transaction Feed</h2>
+          <p>Coming soon: View your latest transactions and get instant alerts for suspicious activity.</p>
+        </div>
+      </Link>
     </main>
   );
 };
