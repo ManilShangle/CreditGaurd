@@ -13,6 +13,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const DashboardPage = () => {
   const [data, setData] = useState([]);
   const [hasError, setHasError] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/data')
@@ -61,7 +62,9 @@ const DashboardPage = () => {
 
       <div className="dashboard-card main-card">
         <h3>Fraud Summary</h3>
-        <Pie data={pieData} />
+        <div style={{ width: '100%', maxWidth: '350px', margin: '0 auto' }}>
+          <Pie data={pieData} />
+        </div>
         <p style={{ marginTop: '1rem' }}>
           <strong>{fraudCount}</strong> out of <strong>{total}</strong> transactions were fraudulent.
         </p>
@@ -69,18 +72,33 @@ const DashboardPage = () => {
       </div>
 
       <div className="dashboard-grid">
-        <div className="dashboard-card">
+        <div className="dashboard-card csv-preview-container">
           <h3>CSV Preview</h3>
-          <table className="csv-table">
-            <thead>
-              <tr>{Object.keys(data[0]).map((key) => <th key={key}>{key}</th>)}</tr>
-            </thead>
-            <tbody>
-              {data.slice(0, 5).map((row, i) => (
-                <tr key={i}>{Object.values(row).map((val, j) => <td key={j}>{val}</td>)}</tr>
-              ))}
-            </tbody>
-          </table>
+          <div
+            className={`csv-preview-wrapper ${expanded ? "expanded" : ""}`}
+            onClick={() => setExpanded(!expanded)}
+          >
+            <div className="csv-table-container">
+              <table className="csv-table">
+                <thead>
+                  <tr>
+                    {Object.keys(data[0]).map((key) => (
+                      <th key={key}>{key}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {(expanded ? data : data.slice(0, 5)).map((row, i) => (
+                    <tr key={i}>
+                      {Object.values(row).map((val, j) => (
+                        <td key={j}>{val}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
 
         <div className="dashboard-card">
