@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './UploadData.css';
 import FlashMessage from '../../components/FlashMessage/FlashMessage.jsx';
+import { Circles } from 'react-loader-spinner';
 
 const UploadPage = () => {
   const [file, setFile] = useState(null);
   const [flash, setFlash] = useState({ message: '', type: '' });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const savedFileName = localStorage.getItem('uploadedFileName');
@@ -32,6 +34,7 @@ const UploadPage = () => {
       return;
     }
 
+    setLoading(true);
     const formData = new FormData();
     formData.append('file', file);
 
@@ -47,11 +50,13 @@ const UploadPage = () => {
       .catch(err => {
         console.error(err);
         showFlash('An error occurred while uploading the file.', 'error');
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
     <div className="upload-page">
+      {loading && <Circles color="#00BFFF" height={80} width={80} />}
       {flash.message && (
         <FlashMessage
           message={flash.message}
