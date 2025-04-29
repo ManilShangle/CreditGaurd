@@ -6,6 +6,7 @@ const UploadPage = () => {
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [flash, setFlash] = useState(null);
+  const [fileUploaded, setFileUploaded] = useState(false);
 
   useEffect(() => {
     const savedFileName = sessionStorage.getItem('uploadedFileName');
@@ -31,6 +32,11 @@ const UploadPage = () => {
       return;
     }
 
+    if (fileUploaded) {
+      showFlash("File already uploaded", "success");
+      return;
+    }
+
     const formData = new FormData();
     formData.append('file', file);
     setIsLoading(true);
@@ -45,6 +51,7 @@ const UploadPage = () => {
         if (data.error) {
           showFlash(data.error, "error");
         } else {
+          setFileUploaded(true);
           showFlash("File uploaded successfully!", "success");
         }
       })
@@ -66,7 +73,7 @@ const UploadPage = () => {
         Upload a CSV file containing transaction data for fraud analysis.
         <br /><br />
         <strong>Required CSV Format:</strong><br />
-        <code>transaction_id, amount, time, location, device, is_fraud</code><br />
+        <code>TransactionID, TransactionDate, Amount, MerchantID, TransactionType, Location, IsFraud</code><br />
         Ensure the header row is present. The model will process each row and return a fraud prediction.
       </p>
 

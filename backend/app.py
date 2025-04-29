@@ -5,7 +5,7 @@ import pandas as pd
 app = Flask(__name__)
 CORS(app)
 
-csv_data = []  # holds the last valid upload
+csv_data = []
 
 @app.route('/api/predict/upload', methods=['POST'])
 def upload_csv():
@@ -20,15 +20,14 @@ def upload_csv():
     try:
         df = pd.read_csv(file)
         # validate headers
-        required = {'transaction_id','amount','time','location','device','is_fraud'}
+        required = {'TransactionID','TransactionDate','Amount','MerchantID','TransactionType','Location','IsFraud'}
         missing = required - set(df.columns)
         if missing:
             return jsonify({'error': f"Missing column(s): {', '.join(missing)}"}), 400
         if df.empty:
             return jsonify({'error': 'Uploaded file contains no data.'}), 400
 
-        # keep top 10 rows for preview
-        csv_data = df.head(10).to_dict(orient='records')
+        csv_data = df.to_dict(orient='records')
         return jsonify({'message': 'File uploaded successfully!'}), 200
 
     except Exception as e:
