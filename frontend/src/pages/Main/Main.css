@@ -19,34 +19,52 @@
   font-size: 1.25rem;
   color: #dcdde1;
   margin-bottom: 2rem;
+  text-align: center;
+  max-width: 800px;
 }
 
-.card {
+.card-link {
+  text-decoration: none;
+  width: 100%;
+  max-width: 600px;
+}
+
+.main-card {
   padding: 2rem;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(15px);
   border-radius: 20px;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
-  max-width: 600px;
   width: 100%;
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   animation: glowing 3s ease-in-out infinite;
+  text-align: center;
 }
 
-.card:hover {
+.main-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
+.main-card h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.main-card p {
+  font-size: 1.2rem;
+}
+
+@keyframes glowing {
+  0% {
+    box-shadow: 0 0 5px #4f83ff, 0 0 10px #4f83ff, 0 0 20px #4f83ff;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  50% {
+    box-shadow: 0 0 20px #4f83ff, 0 0 30px #4f83ff, 0 0 40px #4f83ff;
+  }
+  100% {
+    box-shadow: 0 0 5px #4f83ff, 0 0 10px #4f83ff, 0 0 20px #4f83ff;
   }
 }

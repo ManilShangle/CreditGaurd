@@ -21,6 +21,14 @@ const DashboardPage = () => {
       .then(json => {
         if (json.data && json.data.length > 0) {
           setData(json.data);
+
+          const fraudCount = json.data.filter(row => row.IsFraud === 1).length;
+          if (fraudCount > 0) {
+            localStorage.setItem('fraudStatus', 'Yes');
+          } else {
+            localStorage.setItem('fraudStatus', 'No');
+          }
+
         } else {
           setHasError(true);
         }
@@ -39,11 +47,11 @@ const DashboardPage = () => {
     );
   }
 
-  const fraudCount = data.filter(row => row.is_fraud === 1).length;
+  const fraudCount = data.filter(row => row.IsFraud === 1).length;
   const total = data.length;
-  const avgAmount = (data.reduce((acc, row) => acc + row.amount, 0) / total).toFixed(2);
+  const avgAmount = (data.reduce((acc, row) => acc + row.Amount, 0) / total).toFixed(2);
   const percentFraud = ((fraudCount / total) * 100).toFixed(1);
-  const topMerchants = [...new Set(data.map(row => row.merchant))].slice(0, 3);
+  const topMerchants = [...new Set(data.map(row => row.MerchantID))].slice(0, 3);
 
   const pieData = {
     labels: ['Fraud', 'Legit'],
