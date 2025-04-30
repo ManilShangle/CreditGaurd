@@ -26,17 +26,33 @@
 .dashboard-card {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(15px);
-  border-radius: 16px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: white;
-  padding: 1.5rem;
-  transition: 0.3s ease;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 1.5rem;
+  max-width: 100%;
 }
 
 .dashboard-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  transform: translateY(-10px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+}
+
+.dashboard-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.4rem 0;
+  color: #dcdde1;
 }
 
 .main-card {
@@ -52,7 +68,6 @@
   max-width: 1200px;
   width: 100%;
 }
-
 
 .dashboard-grid {
   display: grid;
@@ -70,7 +85,6 @@
   max-height: 220px;
   cursor: pointer;
   border-radius: 12px;
-
 }
 
 .csv-preview-wrapper.expanded {
