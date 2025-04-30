@@ -73,7 +73,7 @@ const UploadPage = () => {
         Upload a CSV file containing transaction data for fraud analysis.
         <br /><br />
         <strong>Required CSV Format:</strong><br />
-        <code>TransactionID, TransactionDate, Amount, MerchantID, TransactionType, Location, IsFraud</code><br />
+        <code>TransactionID, TransactionDate, Amount, MerchantID, TransactionType, Location</code><br />
         Ensure the header row is present. The model will process each row and return a fraud prediction.
       </p>
 

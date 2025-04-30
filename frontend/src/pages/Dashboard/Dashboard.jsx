@@ -14,6 +14,7 @@ const DashboardPage = () => {
   const [data, setData] = useState([]);
   const [hasError, setHasError] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [metrics, setMetrics] = useState(null);
 
   useEffect(() => {
     fetch('http://localhost:5000/api/data')
@@ -34,6 +35,9 @@ const DashboardPage = () => {
         }
       })
       .catch(() => setHasError(true));
+    fetch('http://localhost:5000/api/metrics')
+      .then(res => res.json())
+      .then(data => setMetrics(data));
   }, []);
 
   if (!data.length || hasError) {
@@ -120,6 +124,16 @@ const DashboardPage = () => {
           <h3>Top Merchants</h3>
           <ul>{topMerchants.map((m, i) => <li key={i}>{m}</li>)}</ul>
         </div>
+        
+        {metrics && (
+          <div className="dashboard-card">
+            <h3>Model Training Accuracy</h3>
+            <p><strong>Overall Accuracy:</strong> {(metrics.accuracy * 100).toFixed(2)}%</p>
+            <p><strong>Fraud Precision:</strong> {(metrics["1"]?.precision * 100).toFixed(2)}%</p>
+            <p><strong>Fraud Recall:</strong> {(metrics["1"]?.recall * 100).toFixed(2)}%</p>
+            <p><strong>Fraud F1-Score:</strong> {(metrics["1"]?.["f1-score"] * 100).toFixed(2)}%</p>
+          </div>
+        )}
       </div>
     </div>
   );
