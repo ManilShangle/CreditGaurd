@@ -1,4 +1,5 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 # CreditGuard (In Progress)
 
 > A work-in-progress web app to manage customer transactions, monitor account balances, and flag potentially fraudulent activity. Built with a modern tech stack and designed for clarity, usability, and security.
@@ -36,6 +37,8 @@ This project is built with a dark-blue/purple themed UI and animated elements to
 Right now, the frontend is under active development. To run the project locally:
 
 =======
+=======
+>>>>>>> Stashed changes
 
 # CreditGuard 💳
 > Full-stack credit card fraud detection dashboard using React + Flask + Machine Learning
@@ -75,13 +78,19 @@ python app.py
 
 #### Frontend (React App)
 Open a new terminal window:
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 ```bash
 cd frontend
 npm install
 npm start
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 ```
 
 
@@ -102,4 +111,7 @@ git lfs clone https://github.com/your-username/CreditGuard.git
 - Model metrics displayed
 - Styling complete
 - Login and analytics planned for future (Coming Soon)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
