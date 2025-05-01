@@ -36,21 +36,10 @@ python app.py
 
 #### Frontend (React App)
 Open a new terminal window:
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 ```bash
 cd frontend
 npm install
 npm start
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
-```
-
 
 
 To clone the repo and pull the model:
